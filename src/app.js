@@ -16,6 +16,7 @@ new Vue({
             this.running = true
             this.playerLife = 100
             this.monsterLife = 100
+            this.logs = []
         },
         attack(especial){
             this.hurt("monsterLife",5,10,especial, "Jogador", "Monstro",'player')
@@ -34,13 +35,14 @@ new Vue({
 
         healAndHurt(){
             this.heal(10,15)
-            this.hurt('playerLife', 7, 12, false)
+            this.hurt('playerLife', 7, 12, false, 'Monstro', 'Jogador', 'monster')
         },
 
         heal(min,max){
             const heal = this.getRandom(min, max)
             // Math.min() pois não queremos que o valor passe de 100
             this.playerLife = Math.min(this.playerLife + heal,100)
+            this.resgisterLog(`Jogador ganhou força de ${heal}.`,'player')
         },
 
         getRandom(min, max){
